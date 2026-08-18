@@ -1,0 +1,36 @@
+:root {
+  font: 16px/150% Avenir, Montserrat, Corbel, 'URW Gothic', sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2 {
+  color: #0f172a;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: 34px;
+  margin: 0;
+}
+
+h2 {
+  line-height: 125%;
+}
+
+p {
+  margin: 0;
+}
