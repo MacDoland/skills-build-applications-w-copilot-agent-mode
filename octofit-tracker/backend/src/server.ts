@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import { Activity } from './models/activity.js';
@@ -15,6 +16,7 @@ const baseUrl = codespaceName
   : `http://localhost:${port}`;
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/api/health', (_request, response) => {
   response.json({ apiUrl: baseUrl, status: 'ok' });
