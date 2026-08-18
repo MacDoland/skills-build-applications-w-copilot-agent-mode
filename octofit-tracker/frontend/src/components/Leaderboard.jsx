@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { fetchCollection } from '../api.js'
 import { ResourceError, ResourceLoading } from './ResourceState.jsx'
 
+const leaderboardEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+  : '/api/leaderboard/'
+
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([])
   const [error, setError] = useState('')
@@ -10,7 +14,7 @@ function Leaderboard() {
   useEffect(() => {
     let ignore = false
 
-    fetchCollection('leaderboard')
+    fetchCollection(leaderboardEndpoint)
       .then((items) => {
         if (!ignore) {
           setLeaderboard(items)

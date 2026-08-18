@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { fetchCollection } from '../api.js'
 import { ResourceError, ResourceLoading } from './ResourceState.jsx'
 
+const usersEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+  : '/api/users/'
+
 function Users() {
   const [users, setUsers] = useState([])
   const [error, setError] = useState('')
@@ -10,7 +14,7 @@ function Users() {
   useEffect(() => {
     let ignore = false
 
-    fetchCollection('users')
+    fetchCollection(usersEndpoint)
       .then((items) => {
         if (!ignore) {
           setUsers(items)

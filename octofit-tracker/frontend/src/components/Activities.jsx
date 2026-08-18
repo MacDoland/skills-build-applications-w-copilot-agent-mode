@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { fetchCollection } from '../api.js'
 import { ResourceError, ResourceLoading } from './ResourceState.jsx'
 
+const activitiesEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  : '/api/activities/'
+
 function Activities() {
   const [activities, setActivities] = useState([])
   const [error, setError] = useState('')
@@ -10,7 +14,7 @@ function Activities() {
   useEffect(() => {
     let ignore = false
 
-    fetchCollection('activities')
+    fetchCollection(activitiesEndpoint)
       .then((items) => {
         if (!ignore) {
           setActivities(items)

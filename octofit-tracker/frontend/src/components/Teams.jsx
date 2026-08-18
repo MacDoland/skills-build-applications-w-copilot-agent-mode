@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { fetchCollection } from '../api.js'
 import { ResourceError, ResourceLoading } from './ResourceState.jsx'
 
+const teamsEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+  : '/api/teams/'
+
 function Teams() {
   const [teams, setTeams] = useState([])
   const [error, setError] = useState('')
@@ -10,7 +14,7 @@ function Teams() {
   useEffect(() => {
     let ignore = false
 
-    fetchCollection('teams')
+    fetchCollection(teamsEndpoint)
       .then((items) => {
         if (!ignore) {
           setTeams(items)

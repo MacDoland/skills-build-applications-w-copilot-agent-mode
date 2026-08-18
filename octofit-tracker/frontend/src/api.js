@@ -16,6 +16,18 @@ function getApiBaseUrl() {
 
 export const apiBaseUrl = getApiBaseUrl()
 
+function getRequestUrl(resourceOrEndpoint) {
+  if (resourceOrEndpoint.startsWith('http')) {
+    return resourceOrEndpoint
+  }
+
+  const resource = resourceOrEndpoint
+    .replace(/^\/?api\/?/, '')
+    .replace(/^\/+|\/+$/g, '')
+
+  return `${apiBaseUrl}/${resource}/`
+}
+
 export function normalizeCollection(payload) {
   if (Array.isArray(payload)) {
     return payload
@@ -30,8 +42,8 @@ export function normalizeCollection(payload) {
   return []
 }
 
-export async function fetchCollection(resource) {
-  const response = await fetch(`${apiBaseUrl}/${resource}/`)
+export async function fetchCollection(resourceOrEndpoint) {
+  const response = await fetch(getRequestUrl(resourceOrEndpoint))
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`)
